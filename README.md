@@ -25,4 +25,4 @@ To run this app locally, make sure you have FFmpeg installed and its bin folder 
 2. Create a `.env` file with your API keys
 3. Install requirements:
    pip install -r requirements.txt
-4. Run with `.python app.py`
+4. Run with `.python main.py`
