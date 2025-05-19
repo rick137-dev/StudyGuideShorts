@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Input Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function showSpinner() {
+            document.getElementById("loadingSpinner").classList.remove("d-none");
+            window.scrollTo(0, 0); 
+        }
+    </script>
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='images/wallpaper.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="card mx-auto shadow p-4" style="max-width: 40rem; background-color: rgba(255,255,255,0.9);">
+            <h4 class="mb-3">Welcome to the Study Service! Input your query below!</h4>
+
+            <form method="POST" onsubmit="showSpinner()">
+                <div class="mb-3">
+                    <input type="text" name="user_text" class="form-control form-control-lg" placeholder="Awaiting question..." required>
+                </div>
+                <div class="d-flex gap-2">
+                    <select name="background_choice" class="form-select" style="max-width: 50%;">
+                        <option value="subway" selected>Subway Surfers</option>
+                        <option value="minecraft">Minecraft</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary flex-grow-1">Get Answers</button>
+                </div>
+            </form>
+
+            <!-- Spinner -->
+            <div id="loadingSpinner" class="d-none text-center mt-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2 mb-0">Generating video...</p>
+            </div>
+
+            {% if gpt_response %}
+                <div class="alert alert-info mt-4" role="alert">
+                    <strong>{{ gpt_response }}</strong>
+                </div>
+            {% endif %}
+
+            {% if video_url %}
+                <div class="mt-4">
+                    <h5 class="mb-2">Here's your study guide!</h5>
+                    <div class="ratio ratio-16x9 rounded overflow-hidden border">
+                        <video controls autoplay>
+                            <source src="{{ url_for('static', filename=video_url.split('static/')[-1]) }}" type="video/mp4">
+                            Oops! Your browser does not support this video tag
+                        </video>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('static', filename=video_url.split('static/')[-1]) }}" class="btn btn-outline-success" download>
+                            Download Video
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
