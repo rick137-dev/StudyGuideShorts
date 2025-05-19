@@ -1,5 +1,5 @@
 
-### 🎬 AI-Powered Study Youtube-Shorts Generator
+# 🎬 AI-Powered Study Youtube-Shorts Generator
 
 This is a Flask web app that turns input questions into fun to follow Youtube Shorts-styled videos. It uses OpenRouter (GPT) to generate answers, 
 ElevenLabs for lifelike voice synthesis, and FFmpeg to overlay animated subtitles on gameplay background videos like Subway Surfers or Minecraft, which are popular background gameplay videos for shorts.  
